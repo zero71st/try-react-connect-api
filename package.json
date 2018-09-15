@@ -1,6 +1,7 @@
 {
   "name": "try-react-connect-api",
   "version": "0.1.0",
+  "homepage": "https://zero71st/github.io/try-react-connect-api/",
   "private": true,
   "dependencies": {
     "react": "^16.5.1",
@@ -11,7 +12,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "gh-pages": "^1.2.0"
