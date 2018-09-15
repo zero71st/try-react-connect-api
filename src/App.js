@@ -3,18 +3,55 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(){
+    super();
+
+    this.state = {
+      users:[],
+      isLoaded:false,
+      error:""
+    }
+  }
+
+  componentDidMount(){
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(res=> res.json())
+      .then(data => this.setState({
+        users:data,
+        isLoaded:true}))
+      .catch(error=> this.setState({error:error,isLoaded:false}))
+  }
+
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+    let {isLoaded,users} = this.state;
+    if(!isLoaded){
+      return(
+        <h1>Loading...</h1>
+      );
+    }else{
+      return (
+        <div>
+          <table>
+            <thead>
+              <th>Code</th>
+              <th>Name</th>
+              <th>Email</th>
+            </thead>
+            <tbody>
+              {users.map(user=> 
+                <tr key={user.id}>
+                  <td>{user.id}</td>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td><button>Remove</button></td>
+                  <td><button>View</button></td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
   }
 }
 
